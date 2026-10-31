@@ -10,7 +10,7 @@ from ensemble_experiment import hard,stats
 from final_submission import score_components,predict
 p=Path(__file__).resolve().parents[2];root=p/'solution_v11';out=root/'runs';data=p/'DASE7506-MP2-main/code/data';b,arrays=load_inputs('validation',data);y=labels(b,read_jsonl(data/'gsm8k_validation.jsonl'));h=hard(b);s=score_components(b,arrays,out/'final_bundle')
 with np.load(p/'solution_v9/runs/validation_scores.npz') as z:base=z['selected']
-with np.load(p/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['validation'].mean(0)
+with np.load(p/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['validation'].mean(0)
 with np.load(out/'linear_oof.npz') as z:lin=base+.25*7.9411391*z['embedding_all_100_val']
 with np.load(out/'role_oof.npz') as z:role=z['validation']
 with np.load(out/'extra_validation_scores.npz') as z:crit=base+.25*128.0030667*z['critic']

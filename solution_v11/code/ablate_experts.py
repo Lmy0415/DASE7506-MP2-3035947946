@@ -30,7 +30,7 @@ def main():
  parser=argparse.ArgumentParser();parser.add_argument('--data-dir',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
  p=Path(__file__).resolve().parents[2];t=time.perf_counter();b,a=load_inputs('train',args.data_dir);y=labels(b,read_jsonl(args.data_dir/'gsm8k_train.jsonl'));h=hard(b);idx=np.arange(len(b));hand=features(b,a['embeddings'])
  with np.load(p/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
- with np.load(p/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof']
+ with np.load(p/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof']
  with np.load(p/'solution_v11/runs/linear_oof.npz') as z:lin=base+.25*7.9411391*z['embedding_all_100']
  with np.load(p/'solution_v11/runs/role_oof.npz') as z:role=z['train']
  with np.load(p/'solution_v11/runs/critic_oof.npz') as z:critic=base+.25*128.0030667*z['0.1']

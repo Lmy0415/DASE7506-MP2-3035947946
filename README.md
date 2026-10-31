@@ -40,6 +40,8 @@ python DASE7506-MP2-main/code/score_predictions.py \
 
 Use `--split validation` and matching output names to reproduce validation. Evidence from the frozen run is in [evidence/frozen](evidence/frozen), including the independent scorer output, original source and asset hashes, and process timings. A separate copy of the official tools is under `benchmark/code`; the original repository is recommended for full data verification.
 
+The independent-expert training materials were moved to `training/independent_expert`. Sixteen development scripts were updated only to point to the new path; the changes and both old and current source hashes are listed in [evidence/training_path_changes.json](evidence/training_path_changes.json). The inference code and checkpoint match the original frozen hashes. `verify_freeze.py` checks the frozen files, including those documented path-only adjustments.
+
 The checkpoint contains 14,184,418 bytes (13.53 MiB). The original test prediction plus independent scoring took 7.16 seconds on local Apple Silicon with four numerical-library threads. A clean-environment repeat took 7.84 seconds; an earlier concurrent run reported 28.96 seconds for prediction alone. The reference Xeon runtime has not been measured and must be checked for eligibility. The scorer tests final numeric answers, not the validity of each reasoning step.
 
 ## Rebuild the last training stage
@@ -53,16 +55,16 @@ python solution_v11/code/prepare_final.py
 
 On the original Python 3.12.2 environment, the rebuilt 24 checkpoint files all matched the frozen SHA-256 hashes. This verifies the final selector, linear expert, and bundle assembly **from the included intermediate artifacts**. It is not a verified full raw-data retraining of all earlier experts. Source code for the earlier stages is included, but some original training caches and a complete end-to-end orchestration are not included; recreating every earlier artifact from scratch remains unverified.
 
-The training folds are grouped by question. The selector uses seeds 201, 202 and 203 with five folds each; the centred linear expert uses seed 20261101. Earlier independent ranker training source and assets are in `kimi_mp2/DASE7506-MP2-main/`. The frozen selector uses threshold 0.6. Development predictions and hyperparameter selection were not fully nested, and multiple prior frozen aggregate test scores were observed during development. No individual test error is used in training, lookup or inference.
+The training folds are grouped by question. The selector uses seeds 201, 202 and 203 with five folds each; the centred linear expert uses seed 20261101. Earlier independent ranker training source and assets are in `training/independent_expert/`. The frozen selector uses threshold 0.6. Development predictions and hyperparameter selection were not fully nested, and multiple prior frozen aggregate test scores were observed during development. No individual test error is used in training, lookup or inference.
 
 The independent expert was originally trained with NumPy 2.5.3, in a separate environment from final inference. In a disposable copy, the following reconstructs its training-only feature cache and runs the recorded ten-member cross-validation recipe:
 
 ```sh
 python3.12 -m venv .training-independent
 .training-independent/bin/python -m pip install -r requirements-independent-training.txt
-ln -s "$(pwd)/DASE7506-MP2-main/code/data" kimi_mp2/DASE7506-MP2-main/code/data
-.training-independent/bin/python kimi_mp2/DASE7506-MP2-main/code/restore_training_feature_cache.py
-.training-independent/bin/python kimi_mp2/DASE7506-MP2-main/code/train_cv.py \
+ln -s "$(pwd)/DASE7506-MP2-main/code/data" training/independent_expert/code/data
+.training-independent/bin/python training/independent_expert/code/restore_training_feature_cache.py
+.training-independent/bin/python training/independent_expert/code/train_cv.py \
   --name cv_math_cosine50_r2 --folds 5 --repeats 2 --hidden 256 \
   --epochs 50 --feature-mode base --cosine
 ```

@@ -47,7 +47,7 @@ def metric(prob,threshold,base_choice,y,h):
 def main():
  project=Path(__file__).resolve().parents[2];root=project/'solution_v11';out=root/'runs';data=project/'DASE7506-MP2-main/code/data';tick=time.perf_counter();b,a=load_inputs('train',data);y=labels(b,read_jsonl(data/'gsm8k_train.jsonl'));h=hard(b);hand=features(b,a['embeddings'])
  _,base=joblib.load(project/'solution_v7/runs/full_features.joblib')
- with np.load(project/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vind=z['validation'].mean(0)
+ with np.load(project/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vind=z['validation'].mean(0)
  with np.load(out/'linear_oof.npz') as z:lin=base+.25*7.9411391*z['embedding_all_100'];vlin=z['embedding_all_100_val']
  with np.load(out/'role_oof.npz') as z:ro=z['train'];vro=z['validation']
  with np.load(out/'critic_oof.npz') as z:cri=base+.25*128.0030667*z['0.1']

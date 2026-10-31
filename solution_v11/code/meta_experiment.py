@@ -26,7 +26,7 @@ def metrics(s,y,h,base):return stats(s,y,h,base)
 def main():
  root=Path(__file__).resolve().parent.parent;out=root/'runs';project=root.parent;data=project/'DASE7506-MP2-main/code/data';tick=time.perf_counter();b,ar=load_inputs('train',data);y=labels(b,read_jsonl(data/'gsm8k_train.jsonl'));h=hard(b)
  with np.load(project/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
- with np.load(project/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vv=z['validation'].mean(0)
+ with np.load(project/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vv=z['validation'].mean(0)
  with np.load(project/'solution_v6/runs/train_evidence.npz') as z:calc=z['features']
  role,_=joblib.load(project/'solution_v7/runs/full_features.joblib');target=joblib.load(project/'solution_v8/runs/target_features_v2.joblib')[:,:37].toarray().reshape(-1,4,37)
  hand=features(b,ar['embeddings']);vvbank,vva=load_inputs('validation',data);vy=labels(vvbank,read_jsonl(data/'gsm8k_validation.jsonl'));vh=hard(vvbank)

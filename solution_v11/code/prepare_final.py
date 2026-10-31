@@ -15,7 +15,7 @@ from gate_features import make
 def main():
  p=Path(__file__).resolve().parents[2];root=p/'solution_v11';out=root/'runs';bundle=out/'final_bundle';bundle.mkdir(exist_ok=True);data=p/'DASE7506-MP2-main/code/data';b,a=load_inputs('train',data);y=labels(b,read_jsonl(data/'gsm8k_train.jsonl'));h=hard(b);hand=features(b,a['embeddings'])
  with np.load(p/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
- with np.load(p/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof']
+ with np.load(p/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof']
  with np.load(out/'linear_oof.npz') as z:lin=base+.25*7.9411391*z['embedding_all_100']
  with np.load(out/'role_oof.npz') as z:role=z['train']
  with np.load(out/'critic_oof.npz') as z:critic=base+.25*128.0030667*z['0.1']
@@ -32,7 +32,7 @@ def main():
   sd=x[ti].reshape(-1,x.shape[-1]).std(0).clip(.05);model=Ridge(alpha=100.,fit_intercept=False,solver='lsqr',tol=1e-4).fit((x[ti]/sd).reshape(-1,x.shape[-1]),(y[ti]-y[ti].mean(1,keepdims=True)).ravel());weights.append(model.coef_);stds.append(sd)
  np.savez(bundle/'linear.npz',weight=np.asarray(weights),sd=np.asarray(stds))
  shutil.copytree(p/'solution_v9/runs/model_bundle',bundle/'v9',dirs_exist_ok=True)
- shutil.copytree(p/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2',bundle/'independent',dirs_exist_ok=True)
+ shutil.copytree(p/'training/independent_expert/runs/cv_math_cosine50_r2',bundle/'independent',dirs_exist_ok=True)
  shutil.copy(p/'solution_v7/runs/model_bundle/quantity_model.joblib',bundle/'role_model.joblib');shutil.copy(p/'solution_v7/runs/model_bundle/relation_correction.npz',bundle/'role_correction.npz')
  shutil.copy(out/'critic_model.npz',bundle/'critic.npz');shutil.copy(out/'expanded_model.npz',bundle/'expanded.npz')
  size=sum(x.stat().st_size for x in bundle.rglob('*') if x.is_file());print(json.dumps({'asset_bytes':size,'asset_mib':size/2**20,'number_gate_models':len(mm)},indent=2));assert size<16*1024*1024

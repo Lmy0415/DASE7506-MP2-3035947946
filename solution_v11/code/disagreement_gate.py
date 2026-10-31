@@ -34,7 +34,7 @@ def fit_predict(x,labels,info,ti,hi,c):
 def main():
  project=Path(__file__).resolve().parents[2];root=project/'solution_v11';out=root/'runs';data=project/'DASE7506-MP2-main/code/data';tick=time.perf_counter();bank,ar=load_inputs('train',data);y=labels(bank,read_jsonl(data/'gsm8k_train.jsonl'));h=hard(bank);hand=features(bank,ar['embeddings'])
  with np.load(project/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
- with np.load(project/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:other=z['oof'];vother=z['validation'].mean(0)
+ with np.load(project/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:other=z['oof'];vother=z['validation'].mean(0)
  with np.load(project/'solution_v6/runs/train_evidence.npz') as z:calc=z['features']
  role,_=joblib.load(project/'solution_v7/runs/full_features.joblib');target=joblib.load(project/'solution_v8/runs/target_features_v2.joblib')[:,:37].toarray().reshape(-1,4,37)
  vb,va=load_inputs('validation',data);vy=labels(vb,read_jsonl(data/'gsm8k_validation.jsonl'));vh=hard(vb);vhand=features(vb,va['embeddings']);vcalc=evidence_features(vb)[0];vtarget=target_features(vb,'numeric').toarray().reshape(-1,4,37)

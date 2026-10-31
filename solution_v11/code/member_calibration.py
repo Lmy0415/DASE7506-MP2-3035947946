@@ -23,7 +23,7 @@ def main():
  p=Path(__file__).resolve().parents[2];out=p/'solution_v11/runs';data=p/'DASE7506-MP2-main/code/data';b,a=load_inputs('train',data);y=labels(b,read_jsonl(data/'gsm8k_train.jsonl'));h=hard(b)
  with np.load(out/'member_oof.npz') as z:members=z['members']
  with np.load(p/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
- with np.load(p/'kimi_mp2/DASE7506-MP2-main/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vind=z['validation'].mean(0)
+ with np.load(p/'training/independent_expert/runs/cv_math_cosine50_r2_scores.npz') as z:ind=z['oof'];vind=z['validation'].mean(0)
  vb,va=load_inputs('validation',data);vy=labels(vb,read_jsonl(data/'gsm8k_validation.jsonl'));vh=hard(vb);vm=np.stack(member_scores(vb,va,p/'solution_v9/runs/model_bundle/target_base/base/legacy'),-1)
  with np.load(p/'solution_v9/runs/validation_scores.npz') as z:vbase=z['selected']
  folds=list(StratifiedKFold(5,shuffle=True,random_state=20261110).split(np.arange(len(b)),h));results=[]

@@ -11,7 +11,7 @@ root=Path(__file__).resolve().parent.parent;data=root.parent/'DASE7506-MP2-main/
 with np.load(root.parent/'solution_v10/runs/honest_scores.npz') as z:base=z['full_base']
 results=[]
 for name in ['cv_math_cosine50_r2','cv_math_h256_r2_e20','cv_math_r1_e20','cv_nomath_r1_e20']:
- with np.load(root.parent/'kimi_mp2/DASE7506-MP2-main/runs'/f'{name}_scores.npz') as z:
+ with np.load(root.parent/'training/independent_expert/runs'/f'{name}_scores.npz') as z:
   a=z['oof'];assert (z['oof_count']>=1).all()
  a=a-a.mean(1,keepdims=True);s=base-base.mean(1,keepdims=True);scale=s.std()/a.std();a*=scale
  for alpha in [0.,.1,.2,.35,.5,1.]:

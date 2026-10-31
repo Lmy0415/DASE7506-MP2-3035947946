@@ -13,7 +13,7 @@ from common import load_inputs,read_jsonl
 from features import features,labels
 from ensemble_experiment import hard
 from disagreement_gate import make,summarize
-project=Path(__file__).resolve().parents[2];sys.path.insert(0,str(project/'kimi_mp2/DASE7506-MP2-main/code'))
+project=Path(__file__).resolve().parents[2];sys.path.insert(0,str(project/'training/independent_expert/code'))
 from ranker import train_ranker
 
 def main():
@@ -21,7 +21,7 @@ def main():
  with np.load(project/'solution_v6/runs/nested_base.npz') as z:tr=z['train_ids'];ho=z['holdout_ids']
  _,ibase,_,hbase=joblib.load(project/'solution_v7/runs/internal_features.joblib')
  with np.load(project/'solution_v6/runs/train_evidence.npz') as z:calc=z['features']
- cache=project/'kimi_mp2/DASE7506-MP2-main/runs/cache/train_base_v3_features.npz'
+ cache=project/'training/independent_expert/runs/cache/train_base_v3_features.npz'
  with np.load(cache) as z:xf=z['features']
  store=out/'nested_independent.npz'
  if store.exists():

@@ -4,8 +4,8 @@ __pycache__/
 *.pyc
 .DS_Store
 /DASE7506-MP2-main/
-/kimi_mp2/DASE7506-MP2-main/code/data
-/kimi_mp2/DASE7506-MP2-main/runs/cache/
+/training/independent_expert/code/data
+/training/independent_expert/runs/cache/
 report/*.aux
 report/*.log
 report/*.synctex.gz

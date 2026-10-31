@@ -1,0 +1,101 @@
+{
+  "explanation": "Only training and development references were redirected; the submitted inference entry point, its inference dependencies and checkpoint remain unchanged.",
+  "files": [
+    {
+      "path": "code/check_final.py",
+      "original_sha256": "5ff3286646dc1a1c41be9897966995932574ea8467edca19985a64aa3c0b424a",
+      "current_sha256": "9c2c70b94edb7ea695b3651af3eb847759385a29b2eb6f3b1663c4fd6fb33f1f",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/disagreement_gate.py",
+      "original_sha256": "4f321de44a1e80341bd028ae8b3d48896a74ac3e084a57206ba132b80aa1f39c",
+      "current_sha256": "13ad5abfdb2b2345675480aad9a6412a1472920eccac47e240386119ce303691",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/gate_ensemble.py",
+      "original_sha256": "5ccced5555ad1e28fd1d02ee44de68a9a94bfe59c447cbdb6708d9062d44ce4f",
+      "current_sha256": "bb03dd189e07a338708f6ba406ed0e5582381721c72a8b00b1b874f28250ffde",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/gate_six.py",
+      "original_sha256": "b0676042b917d31ecd208a4d5a9c48f316962e0596eaf865fe880f6817b5a7ed",
+      "current_sha256": "09f28f69ffdaca2cd8575faeeddb03003ee2e0b90fb6746c1223d2c27bcfa104",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/inspect_crossfit.py",
+      "original_sha256": "4d9cb06cb27c8359d675cf0945f20bfd6fb3634e9d894b4808b93002ec6d978e",
+      "current_sha256": "579c2b31c5c9b83fbc4f40112a61f197e7f8c97d4f3aac7ac73cc0ed8476ffb9",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/member_calibration.py",
+      "original_sha256": "5e4afd28bf9456396e02656b8a91469e30390ad75a5834b083f89f27400c604c",
+      "current_sha256": "1abe59db05a5a90e432e3964d19cb4de2f623db14c8afe8d2bb979611af5ec26",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/meta_experiment.py",
+      "original_sha256": "dedadc48056ed47ee6799ff12cd71a56b6be6cec6de6ec9ca19a27a8281b0291",
+      "current_sha256": "ac9cfb9111c36de3ddafb5c6412c6c47f25fafd5c9ff06d6fe0b7daf93267c34",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/multi_gate.py",
+      "original_sha256": "9330fd1c6c77c9e33ab05fd2f53aadaa37a28be79a74ac4f68679bea4cb90edc",
+      "current_sha256": "1f33a0eaa4d0f8095936ca1e9e4840c3670ab2a4baf9378f3c2ff1add2d3cbae",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/multi_gate_more.py",
+      "original_sha256": "d90c5cea03c85c496603dd24461cae0262c7c9a4cc1cbc0eb34237b194dddcc5",
+      "current_sha256": "6d631c0be74c02202e72ff9d3d1c814a09f76f515e4854bc31e3cebf8069c7da",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/multi_gate_tree.py",
+      "original_sha256": "b6b67865284970ecf180501dbb73814ccdd8e66ea77ae50394a4aa721b6b746b",
+      "current_sha256": "833719bb058639db9c4e8f758c2ec5becead37a4d8a7ac583f4f847c280497bf",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/multi_gate_v6.py",
+      "original_sha256": "c12dc178fd9a1292ddb81e557ede927e94fbdc1fec824fb1b2d81aaaefda7dc3",
+      "current_sha256": "eab8692c85ba020fb5e4a67186e938135b8d46155fa37f6828099dacdd3bbfbc",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/multi_gate_v6_more.py",
+      "original_sha256": "764c05ab560f88910e470a2729edcb37c91b1baffbf1d037ee3f915e77e6673c",
+      "current_sha256": "665c98cad3a0e5cd54f67b1453abd0f8bcef38cb2c883fe1e8848f75231985d8",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/nested_gate.py",
+      "original_sha256": "69c6c0317343a3df3d28f905fc377afa9fef3f51c54b92be8f9b21e11576699b",
+      "current_sha256": "99396a3f69e106fd9e6846944a2928ffaf6c523b4d1231d27c6d560e98dbe0a9",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/prepare_final.py",
+      "original_sha256": "348316c355d0f0e296ad38a89d8e7bab295c2f4023c4b3b0f204c4789cdb4f04",
+      "current_sha256": "6379da2b528d6a8a6e1af0a589e3962d512e304f7fc5cd02a81caea090156078",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/prepare_stacker.py",
+      "original_sha256": "74c7be6be3a9f164520ede21319bdced34cde9baad7fea26eb99424fc263b246",
+      "current_sha256": "d27b71fd7543938cdf213c0db452d6f4e3b6a78c4319128092aa77bff64e8b06",
+      "reason": "training path moved to training/independent_expert"
+    },
+    {
+      "path": "code/vote_experiment.py",
+      "original_sha256": "cbd7bd974bf288ed6dafd5b6fc511ad0060950b878ccee444f683df2280148e9",
+      "current_sha256": "3b7e42ca3162a30738f50cb3cb54ddccc6426c01e68d9030180b4e29df7e674d",
+      "reason": "training path moved to training/independent_expert"
+    }
+  ]
+}

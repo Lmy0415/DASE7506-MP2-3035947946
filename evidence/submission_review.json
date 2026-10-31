@@ -1,0 +1,28 @@
+{
+  "review_scope": "current working tree after removing kimi_mp2 path",
+  "test_reproduction": {
+    "correct": 390,
+    "total": 467,
+    "accuracy": 83.5117773019272,
+    "predicted_indices_identical_to_original": true,
+    "python": "3.12.2 clean environment and pinned inference dependencies"
+  },
+  "selector_ablation_reproduced": true,
+  "expert_ablation_all_six_variants_reproduced": true,
+  "rebuild_from_retained_training_artifacts": {
+    "checkpoint_files_checked": 24,
+    "mismatches": 0
+  },
+  "independent_training_feature_cache_fingerprints_match": true,
+  "known_unverified": [
+    "full raw-data retraining of all earlier experts",
+    "execution time on Xeon Platinum 8457C"
+  ],
+  "original_frozen_training_source_paths_adjusted": 16,
+  "moved_independent_training": {
+    "members_retrained": 10,
+    "member_hash_mismatches": 0,
+    "oof_score_hash_match": true,
+    "requires_recorded_training_feature_columns": true
+  }
+}
