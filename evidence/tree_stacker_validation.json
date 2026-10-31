@@ -1,0 +1,25 @@
+{
+  "selected": {
+    "leaves": 15,
+    "l2": 100.0,
+    "iterations": 60,
+    "strength": 1.0,
+    "hard_correct": 1777,
+    "hard_n": 2114,
+    "fixes": 52,
+    "breaks": 31
+  },
+  "validation_base": {
+    "hard_correct": 315,
+    "hard_n": 355,
+    "fixes": 0,
+    "breaks": 0
+  },
+  "validation_candidate": {
+    "hard_correct": 310,
+    "hard_n": 355,
+    "fixes": 2,
+    "breaks": 7
+  },
+  "seconds": 8.46967500000028
+}

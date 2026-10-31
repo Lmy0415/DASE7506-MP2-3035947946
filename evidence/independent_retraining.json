@@ -1,0 +1,8 @@
+{
+  "independent_expert_members_retrained": 10,
+  "member_hashes_match_original": 10,
+  "oof_scores_sha256_match": true,
+  "environment": "Python 3.12.2 and numpy 2.5.3, local Apple Silicon",
+  "input_features": "retained original training-only feature caches; reconstruction helper also verifies full-array hashes",
+  "all_experts_end_to_end_retrained": false
+}

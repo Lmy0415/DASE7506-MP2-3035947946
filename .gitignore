@@ -1,0 +1,12 @@
+.venv/
+.training-independent/
+__pycache__/
+*.pyc
+.DS_Store
+/DASE7506-MP2-main/
+/kimi_mp2/DASE7506-MP2-main/code/data
+/kimi_mp2/DASE7506-MP2-main/runs/cache/
+report/*.aux
+report/*.log
+report/*.synctex.gz
+reproduced/

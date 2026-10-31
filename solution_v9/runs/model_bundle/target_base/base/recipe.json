@@ -1,0 +1,36 @@
+{
+  "method": "training-calibrated calculation evidence correction",
+  "references_used_at_inference": false,
+  "question_ids_used_as_features": false,
+  "test_used_for_selection": false,
+  "legacy": "legacy/config.json",
+  "evidence_parameters": "correction.npz",
+  "selected_training_plan": {
+    "gate": "group",
+    "view": "all",
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "l2": 0.0001,
+    "strength": 1.0,
+    "correct": 889,
+    "n": 951,
+    "accuracy": 93.48054528236389,
+    "hard_correct": 361,
+    "hard_n": 423,
+    "hard_accuracy": 85.34278869628906
+  }
+}

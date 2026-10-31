@@ -1,0 +1,28 @@
+{
+  "selected": {
+    "mode": "basic",
+    "c": 7,
+    "threshold": 0.6,
+    "gains": [
+      9,
+      14,
+      12
+    ],
+    "mean_gain": 11.666666666666666,
+    "worst_gain": 9,
+    "switches": 114.0
+  },
+  "validation_base": {
+    "hard_correct": 315,
+    "fixes": 0,
+    "breaks": 0,
+    "switches": 0
+  },
+  "validation_candidate": {
+    "hard_correct": 312,
+    "fixes": 3,
+    "breaks": 6,
+    "switches": 10
+  },
+  "seconds": 10.7708137499867
+}

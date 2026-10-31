@@ -1,0 +1,39 @@
+{
+  "split": "validation",
+  "prediction_process_seconds": 10.704496666992782,
+  "scoring_process_seconds": 0.1428457080037333,
+  "total_wall_seconds": 10.847357541992096,
+  "threads_per_library": 4,
+  "processes": "sequential",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "hardware": "Apple Silicon arm64; exact chip unavailable in sandbox",
+  "reference_xeon_runtime_measured": false,
+  "commands": [
+    [
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v3/.venv/bin/python",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/predict.py",
+      "--method",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/final_submission.py",
+      "--checkpoint",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_bundle",
+      "--data-dir",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/DASE7506-MP2-main/code/data",
+      "--split",
+      "validation",
+      "--output",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/validation-predictions.json"
+    ],
+    [
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v3/.venv/bin/python",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/score_predictions.py",
+      "--data-dir",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/DASE7506-MP2-main/code/data",
+      "--split",
+      "validation",
+      "--predictions",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/validation-predictions.json",
+      "--output",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/validation-score.json"
+    ]
+  ]
+}

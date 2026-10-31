@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,booktabs,array,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+\title{Selecting Reliable Mathematical Answers with a Multi-Expert Verifier}
+\author{DASE7506 Mini Project 2\\ Student ID 3035947946}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+I study how to select a correct numeric answer from four language-model solutions to the same word problem. The submitted system combines a candidate ranker with arithmetic checks, quantity-related features and a learned selector that can replace the initial choice. On the supplied test set, the frozen method obtains 390 correct answers out of 467, or 83.51\%. The validation score is 758 out of 798, but the validation subset with competing answers is substantially harder than the full validation set. I report comparisons with earlier versions, an ablation of the learned selector, and limitations of the development protocol. The method runs on a local CPU with 13.53 MiB of inference assets; runtime on the specified reference processor remains unmeasured.
+\end{abstract}
+\section{Task and research question}
+The benchmark supplies a mathematical question, four candidate solution traces and one fixed 1,024-dimensional vector for each trace. The program must return one candidate index. The official scorer extracts the selected candidate's final numeric answer and compares it with the reference; it does not require every step of the selected trace to be valid. Every question has at least one correct candidate. The training, validation and test splits contain 4,755, 798 and 467 questions respectively.
+
+The research question is whether several imperfect views of a solution can help decide when an initial answer should be replaced. An arithmetic checker can detect some wrong calculations, while a candidate ranker can use broader text and vector information. Both can fail when a solution omits a condition or solves for the wrong quantity. The submitted method lets multiple experts propose alternatives and trains a selector to decide when to act on their evidence.
+\section{Method}
+\subsection{Initial score}
+The initial score uses the supplied representations together with textual, numerical and answer-group features. It includes the existing arithmetic evidence correction and a target-related correction. The arithmetic component parses supported numerical equalities with restricted operations, checks them using exact rational arithmetic and may propagate a correction through a limited calculation chain. Ambiguous values and unsupported expressions are not treated as proofs of error. A small number of question-side relation checks cover narrowly defined cases, including certain cumulative-time and initial-plus-new-quantity patterns. When a check does not produce a unique supported candidate answer, the initial ranking is retained.
+
+An internally correct multiplication can still be based on the wrong amount if a solution omits a stop or a cost. The checker therefore supplies evidence about supported computations rather than certifying the full reasoning trace. Equal-valued quantities can refer to different objects, and the current parser cannot always recover their intended bindings.
+\subsection{Expert scores and selection}
+The system constructs six score views for the same four candidates. Alongside the initial score, these include an independently trained neural candidate ranker, a linear expert on centred representations, a quantity-role correction, a numerical program critic, and an expanded arithmetic checker. The independent ranker combines the supplied vectors with text, numeric and answer-group features. The program critic represents supported operations and quantity roles; unsupported graphs contribute no such evidence. These experts share data and features, so their errors need not be independent.
+
+Let $s_{mj}$ be expert $m$'s score for candidate $j$. The selector uses within-question score differences, expert support for alternative answers, answer agreement, and selected text and arithmetic features. It only considers an alternative when its parsed answer differs from the initial answer and at least one expert supports it. Fifteen logistic-regression selectors are fitted on question-grouped cross-fitted expert predictions, and their outputs are averaged. If the highest alternative score is at least 0.6, the corresponding answer is selected; otherwise the initial choice is kept. A selector score is used as a decision criterion, not as a demonstrated calibrated probability.
+
+All learned inference parameters are loaded from the frozen checkpoint. Selection uses only the bank and representations passed to the prediction function, with no generation call, reference answer lookup or test-specific identifier rule.
+\section{Experimental protocol}
+The training references provide candidate correctness labels and support the construction of arithmetic and quantity-related training features. Cross-fitting keeps candidates from the same question in the same fold. Validation is used for development. The official test scorer evaluates a frozen method on final answers.
+
+The intermediate expert predictions are cross-fitted per question, but the full development history is not a fully nested model-selection experiment. Several model families, rules and settings were considered using the same training and validation data. Aggregate test scores from earlier frozen versions were also observed during development. Individual test errors were not used as training labels, but repeated access to aggregate scores limits how strongly the final result can be interpreted as a completely untouched generalization estimate. A separate audit bank would be a useful further check.
+\section{Results}
+Table~\ref{tab:versions} compares frozen versions on the same official splits. The first version is a compact candidate verifier. The calculation-evidence version adds a restricted arithmetic correction, and the relation baseline adds target and relation checks. The final version adds the multi-expert selector. The reported test comparison describes the entire version change and does not isolate the effect of each component.
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Method & Validation & Disagreement & Test \\
+\midrule
+Initial verifier & $752/798$ & $309/355$ & $381/467$ \\
+Arithmetic correction & $756/798$ & $313/355$ & $386/467$ \\
+Relation baseline & $758/798$ & $315/355$ & $386/467$ \\
+Final multi-expert selector & $758/798$ & $315/355$ & $390/467$ \\
+\bottomrule
+\end{tabular}
+\caption{Official correct counts. The disagreement column includes validation questions with at least two distinct valid parsed answers.}
+\label{tab:versions}
+\end{table}
+
+The final test score is 83.51\%, compared with 81.58\% for the initial verifier. The difference is nine questions, or 1.93 percentage points. Relative to the relation baseline, the final system answers four more test questions correctly. These are descriptive comparisons of frozen versions, not a controlled per-component test ablation.
+
+The validation total of 94.99\% is not directly comparable with test accuracy. The validation bank contains 443 questions with no disagreement among valid parsed candidate answers, and the final method answers all 443 correctly. Its accuracy on the remaining 355 questions is 88.73\%. Every test question has competing valid answers. Development on validation and sampling variation may also contribute to the remaining difference; the available results do not identify their separate effects.
+\subsection{Selector ablation and alternatives}
+The final selector changes some answers even though its validation total matches the relation baseline. On validation disagreement questions it fixes four initial errors and changes four correct initial answers into errors. In training cross-fitted predictions, the selector fixes 63 and breaks 37, a net gain of 26 among 2,114 disagreement questions. Because the training predictions and method selection are not fully nested, this is a development result rather than an unbiased estimate of future improvement.
+
+I also removed one expert at a time and refitted the selector with the same five question folds and threshold. The initial-score branch remained in every variant. Table~\ref{tab:ablation} compares these variants with a five-fold selector trained on all six views; this control is not identical to the submitted 15-selector ensemble. The independent ranker and program critic each changed more decisions than the expanded arithmetic expert in this comparison. A difference of one or two validation questions is too small to establish generalization.
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{lrr}
+\toprule
+Selector input & Train OOF disagreement & Validation disagreement \\
+\midrule
+All six score views & $1779/2114$ & $315/355$ \\
+Without independent ranker & $1775/2114$ & $313/355$ \\
+Without linear expert & $1775/2114$ & $315/355$ \\
+Without quantity-role expert & $1777/2114$ & $314/355$ \\
+Without program critic & $1776/2114$ & $313/355$ \\
+Without expanded arithmetic expert & $1779/2114$ & $315/355$ \\
+\bottomrule
+\end{tabular}
+\caption{Paired development ablation with selector refitting. The expert predictions were not fully nested, and validation was reused during development.}
+\label{tab:ablation}
+\end{table}
+
+A gradient-boosted ranking stacker also used cross-fitted expert scores. Its selected development configuration achieved 1,777 correct disagreement questions in training, but its validation result fell from 315 to 310. A separate tree-based candidate comparison gave a validation increase of one question. These exploratory results illustrate both the potential and the risk of adding a more flexible selector. They were not used to claim a test gain for the submitted method.
+\section{Cost, reproducibility and limitations}
+The frozen checkpoint contains 14,184,418 bytes of additional assets, approximately 13.53 MiB, within the 16 MiB limit. A recorded fresh test prediction process and independent scoring process took 7.16 seconds in total on local Apple Silicon hardware with numerical libraries limited to four threads. A clean-environment repeat took 7.84 seconds, while an earlier concurrent run reported 28.96 seconds for prediction alone. The specified Xeon Platinum 8457C was not available for measurement, so eligibility under its 30-second limit remains to be verified.
+
+The submitted repository provides the frozen inference code, checkpoint, official score records, dependencies, hashes and commands for reproducing the score. The final selector and linear expert can be rebuilt from the retained cross-fitted development artifacts, reproducing all 24 checkpoint hashes on the recorded environment. I also retrained the ten independent ranker members from the supplied training data and an exactly restored training feature cache; all ten member hashes and their OOF score file matched. The original independent-ranker training record reports 63.27 seconds. Full end-to-end reconstruction of every other earlier expert from raw training inputs has not yet been verified; the included intermediate artifacts are identified rather than presented as a complete raw-data retraining pipeline.
+
+The largest modelling limitation is that evidence extracted from a trace is only as reliable as its parser. An intermediate result may be treated as a constant, repeated values can be ambiguous, and a valid arithmetic chain may still answer the wrong question. The selector can also reverse a correct answer, as seen in validation. The observed validation and test gaps therefore motivate stricter question-level nested evaluation and additional audit-bank testing before treating small score differences as robust.
+\section{Data, software and AI assistance}
+The questions and references derive from GSM8K under the supplied MIT license. The benchmark provider prepared candidate traces and fixed representations using Qwen3-0.6B; the model weights are not used for inference. The system uses NumPy, SciPy, scikit-learn and joblib, with the versions recorded in the repository. The independently trained candidate ranker was developed in a separate project workspace and is reused as one expert in the submitted system.
+
+OpenAI Codex and Kimi assisted with code development, experiments and technical drafting. The student is responsible for reviewing the implementation, reported results and final submission. The repository retains the benchmark license and attribution notices.
+\begin{thebibliography}{9}
+\bibitem{benchmark} DASE7506 course staff. \emph{Mini Project 2 guide and benchmark repository}. \url{https://github.com/xudongwu-0/DASE7506-MP2}.
+\bibitem{gsm8k} K. Cobbe et al. \emph{Training Verifiers to Solve Math Word Problems}. arXiv, 2021. \url{https://arxiv.org/abs/2110.14168}.
+\bibitem{qwen} Qwen team. \emph{Qwen3-0.6B model card}. \url{https://huggingface.co/Qwen/Qwen3-0.6B}.
+\end{thebibliography}
+\end{document}

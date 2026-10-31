@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "expert_max_score_errors": {
+    "base": 0.0,
+    "independent": 2.288818359375e-05,
+    "linear": 0.0,
+    "role": 0.0,
+    "critic": 6.826095244605312e-10,
+    "expanded": 0.0
+  },
+  "validation_base": {
+    "correct": 758,
+    "hard_correct": 315,
+    "hard_n": 355,
+    "hard_fixes": 0,
+    "hard_breaks": 0
+  },
+  "validation_selected": {
+    "correct": 758,
+    "hard_correct": 315,
+    "hard_n": 355,
+    "hard_fixes": 4,
+    "hard_breaks": 4
+  },
+  "checks": [
+    "exact development expert exports",
+    "empty input",
+    "integer choices",
+    "new IDs and arbitrary length",
+    "permuted candidate scores"
+  ]
+}

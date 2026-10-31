@@ -1,0 +1,10 @@
+{
+  "environment": "fresh Python 3.12, pinned requirements, local Apple Silicon; reference Xeon not measured",
+  "prediction_internal_seconds": 28.957425375003368,
+  "separate_scorer_internal_seconds": 0.022874040994793177,
+  "exact_combined_external_wall_time": "not measured",
+  "correct": 390,
+  "n": 467,
+  "accuracy": 83.5117773019272,
+  "context": "run overlapped other preparation work"
+}

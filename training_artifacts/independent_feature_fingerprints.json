@@ -1,0 +1,27 @@
+{
+  "columns": [
+    1051,
+    1052
+  ],
+  "purpose": "training-only deterministic feature-cache reconstruction, never read at inference",
+  "splits": {
+    "train": {
+      "shape": [
+        4755,
+        4,
+        1072
+      ],
+      "dtype": "float32",
+      "sha256_array_bytes": "645426466a67ddbf536301ed57643011a3e394f691c5365c55770af11d7960d9"
+    },
+    "validation": {
+      "shape": [
+        798,
+        4,
+        1072
+      ],
+      "dtype": "float32",
+      "sha256_array_bytes": "7c17c0174755eeb0fb8df72a4992b8f85f729eafd791f2f776d90df2482e026f"
+    }
+  }
+}

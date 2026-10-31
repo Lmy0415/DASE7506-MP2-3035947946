@@ -1,0 +1,39 @@
+{
+  "split": "test",
+  "prediction_process_seconds": 7.0421534159977455,
+  "scoring_process_seconds": 0.12223700000322424,
+  "total_wall_seconds": 7.164400542009389,
+  "threads_per_library": 4,
+  "processes": "sequential",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "hardware": "Apple Silicon arm64; exact chip unavailable in sandbox",
+  "reference_xeon_runtime_measured": false,
+  "commands": [
+    [
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v3/.venv/bin/python",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/predict.py",
+      "--method",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/final_submission.py",
+      "--checkpoint",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_bundle",
+      "--data-dir",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/DASE7506-MP2-main/code/data",
+      "--split",
+      "test",
+      "--output",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/test-predictions.json"
+    ],
+    [
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v3/.venv/bin/python",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/code/score_predictions.py",
+      "--data-dir",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/DASE7506-MP2-main/code/data",
+      "--split",
+      "test",
+      "--predictions",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/test-predictions.json",
+      "--output",
+      "/Users/jeff/Desktop/DASE_7506/Project/p2/solution_v11/runs/final_frozen/test-score.json"
+    ]
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "members": [
+    {
+      "kind": "mlp",
+      "mode": "context",
+      "file": "member0.npz",
+      "name": "mlp_context_s17_wd0.01_e10"
+    },
+    {
+      "kind": "mlp",
+      "mode": "context",
+      "file": "member1.npz",
+      "name": "mlp_context_s17_wd0.01_e30"
+    },
+    {
+      "kind": "mlp",
+      "mode": "embedding",
+      "file": "member2.npz",
+      "name": "mlp_embedding_s29_wd0.1_e40"
+    },
+    {
+      "kind": "lexical",
+      "full": true,
+      "file": "member3.npz",
+      "name": "lexical_True_10"
+    }
+  ],
+  "criterion": "validation hard-group accuracy; overall accuracy breaks single-model ties",
+  "selected": [
+    "mlp_context_s17_wd0.01_e10",
+    "mlp_context_s17_wd0.01_e30",
+    "mlp_embedding_s29_wd0.1_e40",
+    "lexical_True_10"
+  ]
+}

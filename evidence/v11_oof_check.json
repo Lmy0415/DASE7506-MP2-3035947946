@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "correct": 4397,
+    "hard_correct": 1756,
+    "hard_n": 2114,
+    "hard_fixes": 0,
+    "hard_breaks": 0
+  },
+  "selected": {
+    "correct": 4423,
+    "hard_correct": 1782,
+    "hard_n": 2114,
+    "hard_fixes": 63,
+    "hard_breaks": 37
+  },
+  "per_question_oof": true,
+  "fully_nested": false
+}

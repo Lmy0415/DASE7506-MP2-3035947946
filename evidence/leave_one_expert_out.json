@@ -1,0 +1,105 @@
+{
+  "protocol": "paired leave-one-expert-out; each gate refit with same 5 question folds; test unused",
+  "baseline_expert_always_retained": true,
+  "experts_not_fully_nested": true,
+  "validation_used_during_development": true,
+  "variants": {
+    "all_experts": {
+      "training_oof": {
+        "correct": 4420,
+        "hard_correct": 1779,
+        "hard_n": 2114,
+        "hard_fixes": 0,
+        "hard_breaks": 0
+      },
+      "validation": {
+        "correct": 758,
+        "hard_correct": 315,
+        "hard_n": 355,
+        "hard_fixes": 0,
+        "hard_breaks": 0
+      }
+    },
+    "omit_independent": {
+      "training_oof": {
+        "correct": 4416,
+        "hard_correct": 1775,
+        "hard_n": 2114,
+        "hard_fixes": 35,
+        "hard_breaks": 39
+      },
+      "validation": {
+        "correct": 756,
+        "hard_correct": 313,
+        "hard_n": 355,
+        "hard_fixes": 4,
+        "hard_breaks": 6
+      }
+    },
+    "omit_linear": {
+      "training_oof": {
+        "correct": 4416,
+        "hard_correct": 1775,
+        "hard_n": 2114,
+        "hard_fixes": 13,
+        "hard_breaks": 17
+      },
+      "validation": {
+        "correct": 758,
+        "hard_correct": 315,
+        "hard_n": 355,
+        "hard_fixes": 1,
+        "hard_breaks": 1
+      }
+    },
+    "omit_role": {
+      "training_oof": {
+        "correct": 4418,
+        "hard_correct": 1777,
+        "hard_n": 2114,
+        "hard_fixes": 12,
+        "hard_breaks": 14
+      },
+      "validation": {
+        "correct": 757,
+        "hard_correct": 314,
+        "hard_n": 355,
+        "hard_fixes": 0,
+        "hard_breaks": 1
+      }
+    },
+    "omit_critic": {
+      "training_oof": {
+        "correct": 4417,
+        "hard_correct": 1776,
+        "hard_n": 2114,
+        "hard_fixes": 13,
+        "hard_breaks": 16
+      },
+      "validation": {
+        "correct": 756,
+        "hard_correct": 313,
+        "hard_n": 355,
+        "hard_fixes": 1,
+        "hard_breaks": 3
+      }
+    },
+    "omit_expanded": {
+      "training_oof": {
+        "correct": 4420,
+        "hard_correct": 1779,
+        "hard_n": 2114,
+        "hard_fixes": 0,
+        "hard_breaks": 0
+      },
+      "validation": {
+        "correct": 758,
+        "hard_correct": 315,
+        "hard_n": 355,
+        "hard_fixes": 0,
+        "hard_breaks": 0
+      }
+    }
+  },
+  "elapsed_seconds": 19.63
+}

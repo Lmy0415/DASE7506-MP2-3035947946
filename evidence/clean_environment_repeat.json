@@ -1,0 +1,5 @@
+{
+  "prediction_and_scoring_seconds": 7.838788749999367,
+  "environment": "fresh Python 3.12.2, pinned requirements, local Apple Silicon",
+  "reference_xeon_runtime_measured": false
+}
